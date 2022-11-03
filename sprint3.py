@@ -10,19 +10,21 @@ main.geometry("400x400")
 
 # Load csv - database
 data = pd.read_csv('pizza.csv')
+dataB = data.drop(columns = ['Nombre'], axis=1)
+print(dataB)
+
 
 #Methods
-def test():
-    index = data.index[data['Nombre'] == chosenName.get() ].tolist()
-    print(data.iloc[index])
-
-
 def calculateDistance():
     #Get input user and add to array
     indexTarget = data.index[data['Nombre'] == chosenName.get() ].tolist()
     arrayTarget = []
+    print(indexTarget)
+    print(data.iloc[indexTarget])
     for i in data.iloc[indexTarget]:
         arrayTarget.append(i)
+
+    print(arrayTarget)
 
     #Go through data of other users to get distance
     for x in range(10):
@@ -31,11 +33,11 @@ def calculateDistance():
 
         #Add info to an array
         otherUser = []
-        for i in data.iloc[x]:
+        for i in dataB.iloc[x]:
             otherUser.append(i)
 
-        print(arrayTarget)
-        print(otherUser)
+        #print(arrayTarget)
+        #print(otherUser)
 
         #Get the distance of cosine between the selected and the others
         #result = 1 - spatial.distance.cosine(arrayTarget, otherUser)
