@@ -1,7 +1,8 @@
 #Imports
 from tkinter import *
 import pandas as pd
-import math
+from scipy import spatial
+
 
 #Create frame where interaction happens
 main = Tk()
@@ -17,10 +18,29 @@ def test():
 
 
 def calculateDistance():
+    #Get input user and add to array
     indexTarget = data.index[data['Nombre'] == chosenName.get() ].tolist()
-    target = data.iloc[indexTarget]
-    distance = ((data.loc[:, 1]-target[1])**2 + (data.loc[:, 2]-target[2])**2 + (data.loc[:, 3]-target[3])**2 + (data.loc[:, 4]-target[4])**2 + (data.loc[:, 5]-target[5])**2 + (data.loc[:, 6]-target[6])**2 + (data.loc[:, 7]-target[7])**2) **0.5
-    print(distance)
+    arrayTarget = []
+    for i in data.iloc[indexTarget]:
+        arrayTarget.append(i)
+
+    #Go through data of other users to get distance
+    for x in range(10):
+        #Create array of distances
+        distance = []
+
+        #Add info to an array
+        otherUser = []
+        for i in data.iloc[x]:
+            otherUser.append(i)
+
+        print(arrayTarget)
+        print(otherUser)
+
+        #Get the distance of cosine between the selected and the others
+        #result = 1 - spatial.distance.cosine(arrayTarget, otherUser)
+        #distance.append(result)
+        #print(distance)
 
 
 #List of names for dropdown menu from csv
